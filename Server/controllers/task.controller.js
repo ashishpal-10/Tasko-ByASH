@@ -68,8 +68,22 @@ export const getTaskById = async(req,res)=>{
 
 export const deleteTask = async(req,res)=>{
     try {
-        const {id} = req.params;
-        const deletedTask = await Task.findByIdAndDelete(id);
+        const task = await Task.findById(req.params.id);
+
+        if(!task){
+            return res.status(403).json({
+                message:"task not found"
+            })
+        }
+
+         if (task.user.toString() !== req.userId.toString()) {
+      return res.status(403).json({
+        message: "You are not authorized to delete this task",
+      });
+    }
+        // await Task.findByIdAndDelete(req.params.id);
+
+        const deletedTask = await Task.findByIdAndDelete(req.params.id);
 
         if(!deletedTask){
             return res.status(404).json({
@@ -94,9 +108,23 @@ export const deleteTask = async(req,res)=>{
 
 export const updateTask = async(req,res)=>{
     try {
-        const {id} = req.params;
+        const task = await Task.findById(req.params.id);
+
+        if(!task){
+            return res.status(403).json({
+                message:"task not found"
+            });
+        }
+
+        if(task.user.toString() !== task.userId.toString()){
+            return res.status(403).json({
+                message:"you are not Authorized for update this task"
+            })
+        }
+
+
         const updated = await Task.findByIdAndUpdate(
-            id,
+            req.params.id,
             req.body,
             {
             new:true,

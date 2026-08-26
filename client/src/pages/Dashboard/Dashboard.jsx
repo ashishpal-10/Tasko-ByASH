@@ -1,17 +1,12 @@
+import Navbar from "../../components/Navbar/Navbar";
+import TaskForm from "../../components/TaskFrom/TaskForm";
+import TaskList from "../../components/TaskList/TaskList";
+
+
 import { useEffect, useState } from 'react'
-import "./index.css"
-import { Routes, Route } from "react-router-dom";
+import { getTasks ,deleteTask,updateTask } from '../../services/taskApi.js'
 
-import Signup from "./pages/signup/Signup.jsx";
-import Login from './pages/login/Login.jsx';
-import Dashboard from "./pages/Dashboard/Dashboard.jsx";
-import Navbar from './components/Navbar/Navbar'
-import TaskForm from './components/TaskFrom/TaskForm'
-import TaskList from './components/TaskList/TaskList'
-
-import { getTasks ,deleteTask,updateTask } from './services/taskApi.js'
-
-const App = () => {
+function Dashboard() {
 
   const [newTask, setTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
@@ -68,25 +63,16 @@ const App = () => {
   }
 
   return (
+    <div className="app">
+      <Navbar />
 
-    <>
-     <Routes>
-      <Route path="/" element={<Signup />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-    </Routes>
-    </>
-    // <div className="app">
-    //   <Navbar />
+      <main className="main-content">
+       <TaskForm onTaskCreated={handleTaskCreated} editingTask={editingTask} onUpdateTask={handleUpdateTask} onCancelEdit={()=>setEditingTask(null)} />
 
-    //   <main className="main-content">
-    //    <TaskForm onTaskCreated={handleTaskCreated} editingTask={editingTask} onUpdateTask={handleUpdateTask} onCancelEdit={()=>setEditingTask(null)} />
-
-    //     <TaskList newTask={newTask} onDelete={handleDeleteTask} onUpdate={handleEditTask}/>
-    //   </main>
-    // </div>
-  )
+         <TaskList newTask={newTask} onDelete={handleDeleteTask} onUpdate={handleEditTask}/>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default Dashboard;
