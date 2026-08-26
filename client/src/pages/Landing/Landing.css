@@ -1,0 +1,679 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+  background: #f5f1e8;
+  color: #111;
+}
+
+.landing {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ================= NAVBAR ================= */
+
+.landing-nav {
+  width: 100%;
+  height: 80px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #111;
+  background: #f5f1e8;
+}
+
+.logo,
+.footer-logo {
+  font-family: "Syne", sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.logo span,
+.footer-logo span {
+  background: #ffcf33;
+  padding: 0 5px;
+  border: 2px solid #111;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a,
+.login-btn {
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.nav-links a:hover,
+.login-btn:hover {
+  text-decoration: underline;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.start-btn,
+.primary-btn,
+.cta-btn {
+  text-decoration: none;
+  color: #111;
+  background: #ffcf33;
+  border: 3px solid #111;
+  padding: 13px 20px;
+  font-weight: 700;
+  box-shadow: 5px 5px 0 #111;
+  transition: 0.2s;
+}
+
+.start-btn:hover,
+.primary-btn:hover,
+.cta-btn:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 #111;
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: 0;
+  font-size: 27px;
+  cursor: pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  min-height: calc(100vh - 80px);
+  padding: 80px 7%;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.hero-badge,
+.section-heading > span,
+.workflow-title > span,
+.cta-content > span {
+  display: inline-block;
+  border: 2px solid #111;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  background: white;
+  box-shadow: 3px 3px 0 #111;
+  margin-bottom: 25px;
+}
+
+.hero h1 {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -5px;
+  max-width: 800px;
+}
+
+.hero h1 span {
+  color: #e4572e;
+}
+
+.hero-content > p {
+  max-width: 570px;
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 30px 0;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.secondary-btn {
+  text-decoration: none;
+  color: #111;
+  border: 3px solid #111;
+  padding: 13px 20px;
+  font-weight: 700;
+  background: white;
+}
+
+.hero-note {
+  margin-top: 25px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ================= DASHBOARD ================= */
+
+.hero-visual {
+  position: relative;
+  padding: 40px 20px;
+}
+
+.dashboard-card {
+  background: white;
+  border: 4px solid #111;
+  padding: 25px;
+  box-shadow: 12px 12px 0 #111;
+  transform: rotate(2deg);
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.dashboard-header small {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.dashboard-header h3 {
+  font-family: "Syne", sans-serif;
+  font-size: 24px;
+}
+
+.progress-circle {
+  width: 55px;
+  height: 55px;
+  border: 4px solid #111;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #ffcf33;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 2px solid #111;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.task-item.completed {
+  background: #d7f5d1;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #111;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.task-item div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.task-item strong {
+  font-size: 14px;
+}
+
+.task-item small {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.progress-bar {
+  height: 13px;
+  border: 2px solid #111;
+  margin-top: 20px;
+}
+
+.progress-bar div {
+  width: 80%;
+  height: 100%;
+  background: #e4572e;
+}
+
+.dashboard-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-top: 12px;
+}
+
+.floating-card {
+  position: absolute;
+  background: #fff;
+  border: 3px solid #111;
+  padding: 13px 17px;
+  font-weight: 800;
+  box-shadow: 5px 5px 0 #111;
+  z-index: 2;
+}
+
+.card-one {
+  top: 5px;
+  left: -5px;
+  background: #d7f5d1;
+}
+
+.card-two {
+  right: -10px;
+  bottom: 5px;
+  background: #ffcf33;
+}
+
+/* ================= STATS ================= */
+
+.stats {
+  border-top: 3px solid #111;
+  border-bottom: 3px solid #111;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat {
+  padding: 35px 20px;
+  text-align: center;
+  border-right: 3px solid #111;
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat strong {
+  display: block;
+  font-family: "Syne", sans-serif;
+  font-size: 38px;
+}
+
+.stat span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ================= FEATURES ================= */
+
+.features-section {
+  padding: 120px 7%;
+}
+
+.section-heading {
+  margin-bottom: 60px;
+}
+
+.section-heading h2,
+.workflow-title h2,
+.cta h2 {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(40px, 5vw, 70px);
+  line-height: 0.95;
+  letter-spacing: -3px;
+}
+
+em {
+  color: #e4572e;
+  font-style: normal;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.feature-card {
+  min-height: 310px;
+  position: relative;
+  padding: 30px;
+  border: 3px solid #111;
+  background: white;
+  box-shadow: 8px 8px 0 #111;
+  transition: 0.2s;
+}
+
+.feature-card:nth-child(2) {
+  background: #ffcf33;
+}
+
+.feature-card:nth-child(3) {
+  background: #d7f5d1;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+}
+
+.feature-number {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.feature-icon {
+  font-size: 48px;
+  margin: 35px 0 20px;
+}
+
+.feature-card h3 {
+  font-family: "Syne", sans-serif;
+  font-size: 23px;
+}
+
+.feature-card p {
+  margin-top: 10px;
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+.arrow {
+  position: absolute;
+  right: 25px;
+  bottom: 20px;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+/* ================= WORKFLOW ================= */
+
+.workflow {
+  padding: 110px 7%;
+  background: #111;
+  color: white;
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+  margin-top: 70px;
+}
+
+.step {
+  flex: 1;
+}
+
+.step-number {
+  width: 65px;
+  height: 65px;
+  display: grid;
+  place-items: center;
+  border: 3px solid white;
+  font-weight: 800;
+  margin-bottom: 25px;
+}
+
+.step h3 {
+  font-family: "Syne", sans-serif;
+  font-size: 30px;
+}
+
+.step p {
+  max-width: 250px;
+  line-height: 1.5;
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+.step-line {
+  height: 3px;
+  flex: 0.4;
+  background: white;
+  margin: 0 30px;
+}
+
+/* ================= CTA ================= */
+
+.cta {
+  padding: 120px 7%;
+  text-align: center;
+  background: #ffcf33;
+  border-bottom: 3px solid #111;
+}
+
+.cta p {
+  max-width: 500px;
+  margin: 25px auto 35px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.cta-btn {
+  display: inline-block;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+  padding: 50px 7%;
+  background: #f5f1e8;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-logo {
+  font-size: 25px;
+}
+
+footer p {
+  font-size: 13px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #111;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.copyright {
+  grid-column: 1 / -1;
+  border-top: 2px solid #111;
+  padding-top: 20px;
+  font-size: 12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+    margin-right: 20px;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 60px;
+  }
+
+  .hero-visual {
+    max-width: 650px;
+    width: 100%;
+    margin: auto;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 35px;
+  }
+
+  .step-line {
+    width: 3px;
+    height: 40px;
+    flex: none;
+    margin: 0 0 0 31px;
+  }
+}
+
+@media (max-width: 600px) {
+  .landing-nav {
+    height: 70px;
+    padding: 0 5%;
+  }
+
+  .logo {
+    font-size: 25px;
+  }
+
+  .nav-actions .login-btn {
+    display: none;
+  }
+
+  .start-btn {
+    padding: 10px 12px;
+    font-size: 12px;
+    box-shadow: 3px 3px 0 #111;
+  }
+
+  .hero {
+    padding: 55px 5%;
+    gap: 50px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    letter-spacing: -3px;
+  }
+
+  .hero-content > p {
+    font-size: 16px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    text-align: center;
+  }
+
+  .dashboard-card {
+    padding: 18px;
+    box-shadow: 7px 7px 0 #111;
+  }
+
+  .floating-card {
+    font-size: 11px;
+    padding: 9px 11px;
+  }
+
+  .card-one {
+    left: -8px;
+  }
+
+  .card-two {
+    right: -5px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat {
+    border-bottom: 3px solid #111;
+  }
+
+  .stat:nth-child(2) {
+    border-right: none;
+  }
+
+  .stat strong {
+    font-size: 28px;
+  }
+
+  .features-section,
+  .workflow,
+  .cta {
+    padding: 80px 5%;
+  }
+
+  .section-heading h2,
+  .workflow-title h2,
+  .cta h2 {
+    font-size: 42px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    min-height: 280px;
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+    padding: 40px 5%;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .copyright {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .start-btn {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .dashboard-header h3 {
+    font-size: 20px;
+  }
+}

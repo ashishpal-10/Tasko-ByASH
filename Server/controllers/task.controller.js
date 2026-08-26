@@ -48,7 +48,7 @@ export const getTaskById = async(req,res)=>{
         const task = await Task.findById(id);
 
         if(!task){
-            return req.status(400).json({
+            return res.status(400).json({
                 message:"Tasks Not Found",
             })
         }
@@ -94,7 +94,7 @@ export const deleteTask = async(req,res)=>{
 
         res.status(200).json({
             message:"Task Deleted Successfully",
-            Task:deleteTask,
+            Task:deletedTask,
         });
 
         
@@ -116,7 +116,7 @@ export const updateTask = async(req,res)=>{
             });
         }
 
-        if(task.user.toString() !== task.userId.toString()){
+        if(task.user.toString() !== req.userId.toString()){
             return res.status(403).json({
                 message:"you are not Authorized for update this task"
             })

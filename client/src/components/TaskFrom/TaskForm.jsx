@@ -1,35 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createTask } from "../../services/taskApi";
 import "./TaskForm.css";
 
 function TaskForm({ onTaskCreated, editingTask, onUpdateTask, onCancelEdit }) {
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    status: "pending",
-    priority: "medium",
-    dueDate: "",
+    title: editingTask?.title || "",
+    description: editingTask?.description || "",
+    status: editingTask?.status || "pending",
+    priority: editingTask?.priority || "medium",
+    dueDate: editingTask?.dueDate ? editingTask.dueDate.split("T")[0] : "",
   });
-
-  useEffect(() => {
-    if (editingTask) {
-      setFormData({
-        title: editingTask.title || "",
-        description: editingTask.description || "",
-        status: editingTask.status || "pending",
-        priority: editingTask.priority || "medium",
-        dueDate: editingTask.dueDate ? editingTask.dueDate.split("T")[0] : "",
-      });
-    } else {
-      setFormData({
-        title: "",
-        description: "",
-        status: "pending",
-        priority: "medium",
-        dueDate: "",
-      });
-    }
-  }, [editingTask]);
 
   const handleChange = (e) => {
     setFormData({
@@ -43,10 +23,9 @@ function TaskForm({ onTaskCreated, editingTask, onUpdateTask, onCancelEdit }) {
 
     try {
       if (editingTask) {
-        const data = await onUpdateTask(editingTask._id, formData);
+        await onUpdateTask(editingTask._id, formData);
       } else {
         const data = await createTask(formData);
-        console.log("Task created:", data);
         onTaskCreated(data.task);
       }
 

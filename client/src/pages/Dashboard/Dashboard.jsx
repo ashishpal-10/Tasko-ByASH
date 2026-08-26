@@ -67,7 +67,7 @@ function Dashboard() {
       <Navbar />
 
       <main className="main-content">
-       <TaskForm onTaskCreated={handleTaskCreated} editingTask={editingTask} onUpdateTask={handleUpdateTask} onCancelEdit={()=>setEditingTask(null)} />
+       <TaskForm key={editingTask?._id || 'new'} onTaskCreated={handleTaskCreated} editingTask={editingTask} onUpdateTask={handleUpdateTask} onCancelEdit={()=>setEditingTask(null)} />
 
          <TaskList newTask={newTask} onDelete={handleDeleteTask} onUpdate={handleEditTask}/>
       </main>

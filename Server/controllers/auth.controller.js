@@ -13,7 +13,7 @@ export const signup = async (req, res) => {
 
         // check User Already Exist or not
         if (existingUser) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: "User Already Found!"
             });
         }
