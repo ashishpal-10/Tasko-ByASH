@@ -4,6 +4,7 @@ import cors from "cors";
 
 import ConnectDB from "./config/db.js";
 import taskRoutes from "./routes/task.routes.js"
+import authRoutes from "./routes/auth.routes.js"
 
 dotenv.config();
 const app =express();
@@ -19,6 +20,7 @@ app.get("/",(req,res)=>{
 
 
 app.use("/api/tasks",taskRoutes);
+app.use("/api/auth",authRoutes);
 
 
 ConnectDB().then(()=>{
