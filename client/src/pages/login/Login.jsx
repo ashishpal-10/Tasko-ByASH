@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/taskApi.js";
 import "./login.css";
 
@@ -24,14 +24,11 @@ function Login() {
     try {
       const data = await loginUser(formData);
 
-      console.log("Login successful:", data);
-
-      // Save JWT token
       localStorage.setItem("token", data.token);
+      localStorage.setItem("userName", data.user.name);
 
       alert("Login successful!");
 
-      // Redirect to dashboard
       navigate("/dashboard");
 
     } catch (error) {
@@ -76,6 +73,12 @@ function Login() {
             LOGIN
           </button>
         </form>
+
+        <p className="auth-switch">
+          Don&apos;t have an account? <Link to="/signup">Sign Up</Link>
+        </p>
+
+        <Link to="/" className="back-home">← Back to Home</Link>
       </div>
     </div>
   );

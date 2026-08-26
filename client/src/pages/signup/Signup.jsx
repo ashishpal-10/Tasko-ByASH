@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from "../../services/taskApi.js";
 import "./signup.css";
 
 function Signup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,9 +22,7 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const data = await signupUser(formData);
-
-      console.log("Signup successful:", data);
+      await signupUser(formData);
 
       alert("Account created successfully!");
 
@@ -31,6 +31,8 @@ function Signup() {
         email: "",
         password: "",
       });
+
+      navigate("/login");
     } catch (error) {
       console.error("Signup failed:", error);
 
@@ -84,6 +86,12 @@ function Signup() {
             SIGN UP
           </button>
         </form>
+
+        <p className="auth-switch">
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+
+        <Link to="/" className="back-home">← Back to Home</Link>
       </div>
     </div>
   );

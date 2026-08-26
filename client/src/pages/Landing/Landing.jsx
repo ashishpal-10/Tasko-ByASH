@@ -1,25 +1,72 @@
-import React from "react";
+import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import "./Landing.css";
 
 const features = [
   {
     number: "01",
     title: "CREATE TASKS",
-    text: "Create and manage your daily tasks in seconds.",
+    text: "Add tasks in seconds with title, description, priority, and due dates. Stay on top of everything.",
   },
   {
     number: "02",
     title: "TRACK PROGRESS",
-    text: "Keep track of pending and completed tasks easily.",
+    text: "Visualize your workflow with status tags — pending, in-progress, or completed at a glance.",
   },
   {
     number: "03",
     title: "STAY ORGANIZED",
-    text: "Keep all your work organized in one simple dashboard.",
+    text: "Filter by priority, sort by due date, and keep your entire workload structured in one place.",
+  },
+];
+
+const testimonials = [
+  {
+    name: "Sarah K.",
+    role: "Product Manager",
+    text: "Tasko replaced 3 different apps for me. Simple, fast, and exactly what I needed.",
+  },
+  {
+    name: "James L.",
+    role: "Freelancer",
+    text: "I finally know what I'm working on every day. The dashboard is clean and distraction-free.",
+  },
+  {
+    name: "Priya M.",
+    role: "Student",
+    text: "Managing assignments and projects has never been easier. Highly recommend it.",
   },
 ];
 
 const Landing = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const sectionsRef = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    sectionsRef.current.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const addSectionRef = (el) => {
+    if (el && !sectionsRef.current.includes(el)) {
+      sectionsRef.current.push(el);
+    }
+  };
+
   return (
     <div className="landing">
       {/* NAVBAR */}
@@ -28,30 +75,26 @@ const Landing = () => {
           TASK<span>O</span>
         </div>
 
-        <div className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#features">Features</a>
-          <a href="#how-it-works">How It Works</a>
-          <a href="#about">About</a>
+        <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+          <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
+          <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
+          <a href="#how-it-works" onClick={() => setMenuOpen(false)}>How It Works</a>
+          <a href="#testimonials" onClick={() => setMenuOpen(false)}>Reviews</a>
+          <Link to="/login" className="login-btn" onClick={() => setMenuOpen(false)}>Login</Link>
+          <Link to="/signup" className="start-btn" onClick={() => setMenuOpen(false)}>Get Started →</Link>
         </div>
 
-        <div className="nav-actions">
-          <a href="/login" className="login-btn">
-            Login
-          </a>
-
-          <a href="/signup" className="start-btn">
-            Get Started →
-          </a>
-        </div>
-
-        <button className="menu-btn">
-          ☰
+        <button
+          className="menu-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? "✕" : "☰"}
         </button>
       </nav>
 
       {/* HERO */}
-      <section className="hero" id="home">
+      <section className="hero" id="home" ref={addSectionRef}>
         <div className="hero-content">
           <div className="hero-badge">
             ✦ SIMPLE TASK MANAGEMENT
@@ -64,14 +107,14 @@ const Landing = () => {
           </h1>
 
           <p>
-            Tasko helps you create, organize and track your
+            Tasko helps you create, organize, and track your
             tasks so you can focus on what actually matters.
           </p>
 
           <div className="hero-buttons">
-            <a href="/signup" className="primary-btn">
+            <Link to="/signup" className="primary-btn">
               Start Managing Tasks →
-            </a>
+            </Link>
 
             <a href="#features" className="secondary-btn">
               See Features
@@ -85,7 +128,7 @@ const Landing = () => {
 
         {/* DASHBOARD CARD */}
         <div className="hero-visual">
-          <div className="floating-card card-one">
+          <div className="floating-card card-one pulse">
             <span>✓</span>
             Task Completed
           </div>
@@ -94,7 +137,7 @@ const Landing = () => {
             <div className="dashboard-header">
               <div>
                 <small>MY TASKS</small>
-                <h3>Today's Tasks</h3>
+                <h3>Today&apos;s Tasks</h3>
               </div>
 
               <div className="progress-circle">
@@ -136,27 +179,27 @@ const Landing = () => {
             </div>
           </div>
 
-          <div className="floating-card card-two">
+          <div className="floating-card card-two pulse">
             ⚡ Stay Productive
           </div>
         </div>
       </section>
 
       {/* STATS */}
-      <section className="stats">
+      <section className="stats reveal" ref={addSectionRef}>
         <div className="stat">
-          <strong>10K+</strong>
+          <strong>100+</strong>
           <span>Tasks Created</span>
         </div>
 
         <div className="stat">
-          <strong>50K+</strong>
+          <strong>500+</strong>
           <span>Tasks Completed</span>
         </div>
 
         <div className="stat">
-          <strong>99.9%</strong>
-          <span>Focus</span>
+          <strong>99%</strong>
+          <span>Uptime</span>
         </div>
 
         <div className="stat">
@@ -166,7 +209,7 @@ const Landing = () => {
       </section>
 
       {/* FEATURES */}
-      <section className="features-section" id="features">
+      <section className="features-section reveal" id="features" ref={addSectionRef}>
         <div className="section-heading">
           <span>WHY TASKO?</span>
 
@@ -202,8 +245,36 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* TESTIMONIALS */}
+      <section className="testimonials-section reveal" id="testimonials" ref={addSectionRef}>
+        <div className="section-heading">
+          <span>WHAT PEOPLE SAY</span>
+
+          <h2>
+            LOVED BY
+            <br />
+            <em>REAL USERS.</em>
+          </h2>
+        </div>
+
+        <div className="testimonials-grid">
+          {testimonials.map((t, i) => (
+            <div className="testimonial-card" key={i}>
+              <p>&ldquo;{t.text}&rdquo;</p>
+              <div className="testimonial-author">
+                <div className="avatar">{t.name[0]}</div>
+                <div>
+                  <strong>{t.name}</strong>
+                  <span>{t.role}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* HOW IT WORKS */}
-      <section className="workflow" id="how-it-works">
+      <section className="workflow reveal" id="how-it-works" ref={addSectionRef}>
         <div className="workflow-title">
           <span>HOW IT WORKS</span>
 
@@ -218,7 +289,7 @@ const Landing = () => {
           <div className="step">
             <div className="step-number">01</div>
             <h3>Create</h3>
-            <p>Add your task with a simple title and description.</p>
+            <p>Add your task with a title, description, priority, and due date.</p>
           </div>
 
           <div className="step-line"></div>
@@ -226,7 +297,7 @@ const Landing = () => {
           <div className="step">
             <div className="step-number">02</div>
             <h3>Organize</h3>
-            <p>Manage your tasks and keep your priorities clear.</p>
+            <p>Manage your tasks, set priorities, and keep your workflow clear.</p>
           </div>
 
           <div className="step-line"></div>
@@ -234,13 +305,13 @@ const Landing = () => {
           <div className="step">
             <div className="step-number">03</div>
             <h3>Complete</h3>
-            <p>Finish your work and mark your tasks as completed.</p>
+            <p>Finish your work, mark tasks as done, and stay productive.</p>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="cta" id="about">
+      <section className="cta reveal" ref={addSectionRef}>
         <div className="cta-content">
           <span>READY?</span>
 
@@ -255,9 +326,9 @@ const Landing = () => {
             Start managing them with Tasko.
           </p>
 
-          <a href="/signup" className="cta-btn">
-            Get Started — It's Free →
-          </a>
+          <Link to="/signup" className="cta-btn">
+            Get Started — It&apos;s Free →
+          </Link>
         </div>
       </section>
 
